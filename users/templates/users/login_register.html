@@ -1,0 +1,107 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+
+
+
+
+{% if page == 'register' %}
+
+<div class="container-fluid " style="background-color:snow">
+    <div class="row justify-content-md-center">
+        <div class="card px-2 py-2 mx-3 my-4 justify-content-md-center" style="width: 20rem;border-radius: 4%;box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;">
+        <div class="card-body text-center">
+
+            <h3 class="mt-2">Register an Account</h3>
+            <p>Create a new developer account</p>
+        </div>
+
+        <form method="POST" action="{% url 'register' %}" class="form-group">
+            {% csrf_token %}
+              <div class="row justify-content-md-center">
+            {% for field in form %}
+            <div class="form__field mx-2 ">
+                <label  class="form-label" for="formInput#text">{{field.label}}</label>
+                 {{field}}
+
+                <!-- {% if field.help_text %}
+                <small>{{field.help_text}}</small>
+                {% endif %} -->
+
+                {% for error in field.errors %}
+                <p style="color: red;">{{error}}</p>
+                {% endfor %}
+
+            </div>
+
+            {% endfor %}
+            </div>
+
+            <div class="auth__actions" >
+                
+                <button class="btn btn-primary mt-2" type="submit">Sign In</button>
+            </div>
+        </form>
+        <div class="auth__alternative">
+            <p>Already have an Account?</p>
+            <a href="{% url 'login' %}" class="btn btn-outline-primary" style="text-decoration:none;">Log In</a>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+{% else %}
+
+<div class="container-fluid " style="background-color:snow">
+    <div class="row justify-content-md-center">
+        <div class="card px-2 py-2 mx-3 my-4 justify-content-md-center" style="width: 20rem;border-radius: 4%;box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;">
+
+        <div class=" card-body text-center">
+           
+            <h3 class="mt-2">Account Login</h3>
+            <p>Hello Developer, Welcome Back!</p>
+        </div>
+
+        <form action="{% url 'login' %}" method="POST" class="form-group">
+            {% csrf_token %}
+            <!-- Input:Username -->
+            <div class="form__field">
+                <label class="form-label" for="formInput#text">Username: </label>
+                <input class="form-control" id="formInput#text" type="text" name="username"
+                    placeholder="Enter your username..." />
+            </div>
+
+            <!-- Input:Password -->
+            <div class="form__field">
+                <label class="form-label" for="formInput#password">Password: </label>
+                <input class="form-control" id="formInput#passowrd" type="password" name="password"
+                    placeholder="••••••••" />
+            </div>
+         
+            <div class="auth__actions" >
+                
+                <button class="btn btn-primary mt-2" type="submit">Login</button>
+            </div>
+        </form>
+
+        <div class="auth__alternative">
+            <p>Don’t have an Account?</p>
+            <a href="{% url 'register' %} " class="btn btn-primary">Sign Up</a>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+
+
+{% endif %}
+
+
+
+
+
+{% endblock content %}

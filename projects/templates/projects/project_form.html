@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+
+<!-- Main Section -->
+<div class="container border-primary">
+    <div class="row">
+        <div class="formWrapper">
+            <br>
+
+            <form class="form-group" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <!-- Input:Text -->
+                <div class="row">
+                    <div class="col-md-2">
+                    <label  class="form-label"for="formInput#text">{{field.label}} </label></div>
+                     <div class="col-md-8">{{field}}</div>
+                </div>
+                
+                {% endfor %}
+
+                <button class="btn btn-warning" type="submit" value="Submit" >submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<!-- Main Section -->
+<div class="container">
+    <section class="hero-section text-center">
+        <div class="container container--narrow">
+            <div class="hero-section__box">
+                <h2>CONNECT WITH <span>DEVELOPERS</span></h2>
+                <h2>FROM AROUND THE WORLD</h2>
+            </div>
+
+            <div class="hero-section__search my-3">
+
+                <form id="searchForm" class="form-group " action="{% url 'profiles' %}" method="get">
+                  <div class="row justify-content-md-center">
+                    <div class="col-md-5 g-0 p-0 m-0">
+                    <div class="form__field">
+                 
+                        <input class="form-control" id="formInput#search" type="text" name="search_query"
+                         placeholder="Search by developer name" value="{{search_query}}" />
+                    </div>
+                  </div>
+                    <div class="col-md-2 g-0 p-0 m-0">
+                    <button class="btn btn-dark" type="submit" value="Search">Search</button>
+                    </div>
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </section>
+    <!-- Search Result: DevList -->
+    <section class="devlist p-5 ">
+        <div class="container">
+            <div class="row">
+
+                {% for profile in profiles %}
+                <div class="col-md-4">
+                <div class="card" style="width:18rem;">
+                    
+                        <a href="{% url 'user-profile' profile.id %}" class="text-success mx-1" style="text-decoration: none;">
+                            
+                                <img class="card-img-top" src="{{  profile.profile_image.url }}" alt="image" />
+                                
+                                    <h3 class="card-title mx-1">{{profile.name}}</h3>
+                                    </a>
+                                    <h5 class="card-title mx-1">{{profile.short_intro|slice:"60"}}</h5>
+                                
+                           
+                            <p class="card-text mx-1">{{profile.bio|slice:"150"}}</p>
+                            
+                                <div class="row">
+                                    
+                                {% for skill in profile.skill_set.all|slice:"5" %}
+                                <div class="col-md-3 mx-1 my-2">
+                               <h5> <span class="badge bg-success">
+                                    {{skill.name}}
+                                </span></h5>
+                                </div>
+                                {% endfor %}
+                                </div>
+
+                            
+                        
+                    
+                </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+
+    {% include 'pagination.html' with queryset=profiles custom_range=custom_range %}
+</div>
+
+{% endblock content %}

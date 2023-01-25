@@ -1,0 +1,76 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+  <main class="projects" >
+    <section class="hero-section text-center">
+      <div class="container container--narrow">
+        <div class="hero-section__box">
+          <h2>Search for <span>Projects</span></h2>
+        </div>
+
+        <div class=" hero-section__search">
+          <form id ='searchForm'   class="form-group" action="{% url 'projects'%}" method="get">
+            <div class="row justify-content-md-center">
+                <div class="col-md-5 g-0 p-0 m-0">
+              
+              <input class="form-control" id="formInput#search" type="text" name="search_query"
+                placeholder="Search by Project Title" value ="{{search_query}}"/>
+                </div>
+              <div class="col-md-2 g-0 p-0 m-0">
+            <button class="btn btn-dark" type="submit" value="Search">Search</button>
+            
+            </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Search Result: DevList -->
+    <section class="projectsList">
+      <div class="container">
+        <div class="grid grid--three">
+
+            <div class="container">
+                <div class="row px-3 my-2">
+         {% for project in data %}
+
+          
+            
+                <div class="col-md-4">
+            <div class="card m-3" style="width: 18rem;">
+              <a href="{% url 'project' project.id%}" class="project" style="text-decoration:none">
+                <img class="card-img-top" src="{{ project.owner.profile_image }}" alt="project thumbnail" width="200" height="200" />
+                <div class="card__body">
+                  <h3 class="project__title">{{project.title}}</h3>
+                  <p><a class="project__author" href="{% url 'user-profile' project.owner.id %}">By
+                    {{project.owner.name}}</a></p>
+                  <p class="project--rating">
+                    <span style="font-weight: bold;">{{project.vote_ratio}}%</span> Postive
+                    Feedback ({{project.vote_total}} Votes)
+                  </p>
+                  <div class="project__tags my-2">
+                    {% for tag in project.tags  %}
+                   <span class="badge bg-success">
+                      <strong>{{tag.name}}</strong>
+                    </span>
+                    {% endfor %}
+                    
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% include 'pagination.html' with queryset=projects custom_range=custom_range %}
+
+  
+  </main>
+
+
+{% endblock content %}

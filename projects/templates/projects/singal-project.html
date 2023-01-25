@@ -1,0 +1,90 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+
+<main class="singleProject my-md">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card">
+          <div class="card-header"><h3 class="singleProject__subtitle">Tools & Stacks</h3></div>
+
+          <div class="card-body">
+            {% for tag in project.tags.all %}
+            <h4><span class="badge bg-info">
+              {{tag}}
+            </span></h4>
+            {% endfor %}
+          </div>
+          {% if project.source_link %}
+          <a class="singleProject__liveLink" href="#" target="_blank"><i class="im im-external-link"></i>Source Code
+          </a>
+          {% endif %}
+          {% if project.demo_link %}
+          <a class="singleProject__liveLink" href="#" target="_blank"><i class="im im-external-link"></i>live demo
+          </a>
+          {% endif %}
+</div>
+        </div>
+        <div class="col-md-9">
+          <img class="singleProject__preview" src="{{ project.featured_image.url }}" alt="portfolio thumbnail" width="200" height="200" /><br>
+         <div class="my-3 " style="font-size:large"> <a href="profile.html" class="singleProject__developer my-2" style="text-decoration: none;">akash babu</a></div>
+          <div class="card">
+          <div class="card-header"><h2 class="singleProject__title">{{ project.title }}</h2></div>
+          <div class="card-body">
+          <h3 class="card-title">About the Project</h3>
+          
+            <p class="card-text">{{project.description}}</p>
+          
+          </div>
+          </div>
+
+          <div class="comments my-3 mx-2">
+            <h3 class="singleProject__subtitle">Feedback</h3>
+            <h5 class="project--rating">
+              {{project.vote_ratio}} Postive Feedback ({{project.vote_total}} Vote {{project.vote_total|pluralize:"s"}})
+            </h5>
+             <hr>
+            <form class="form-group" action="#" method="POST">
+              <!-- Textarea -->
+              <div class="form__field">
+                <label class="form-label" for="formInput#textarea">Comments: </label>
+                <textarea class="form-control" name="message" id="formInput#textarea"
+                  placeholder="Write your comments here..."></textarea>
+              </div>
+              <input class="btn btn--sub btn--lg" type="submit" value="Comments" />
+            </form>
+            <div class="container">
+              <div class="row">
+                <a href="profile.html">
+                  <img class="avatar avatar--md"
+                    src="" alt="user" />
+                </a>
+                  <a href="" class="comment__author">akash babu</a>
+                  <p class="comment__info">
+                    first comment.
+                  </p>
+                </div>
+              <hr>
+              <div class="row">
+                <a href="">
+                  <img class="avatar avatar--md" src="" alt="user" />
+                </a>
+                <div class="comment__details">
+                  <a href="" class="comment__author">raj gurjar</a>
+                  <p class="comment__info">
+                   comments are written here
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </main>
+
+{% endblock %}

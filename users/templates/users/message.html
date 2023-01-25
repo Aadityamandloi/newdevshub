@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+  <!-- Main Section -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        
+        
+        <div class="card">
+        <h2 class="card-header">{{message.subject}}</h4>
+          <div class="card-body">
+          <a href="profile.html" class="card-title" style="text-decoration:none">{{message.sender}}</a>
+          <p class="card-text">{{message.created}}</p><hr>
+          <p class="card-text">
+           {{message.body|linebreaksbr}}
+          </p>
+          </div>
+      </div>
+      <a class="btn btn-info my-3" href="{% url 'inbox' %}">Back</a>
+    </div>
+    </div>
+  </div>
+{% endblock content %}
+
+<div class="card">
+  <div class="card-header">
+    Featured
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
