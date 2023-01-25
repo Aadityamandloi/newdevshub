@@ -13,7 +13,8 @@ def projects(request):
 
    
 
-    response= requests.get('http://127.0.0.1:8000/api/projects/')    
+#     response= requests.get('http://127.0.0.1:8000/api/projects/')
+    response= requests.get('https://newdevshub-production.up.railway.app/api/projects/')
     data= response.json()
    
     
